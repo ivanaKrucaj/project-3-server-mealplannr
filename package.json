@@ -1,0 +1,36 @@
+{
+  "name": "project-3-server-mealplannr",
+  "version": "1.0.0",
+  "description": "The server-side of Mealplannr project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivanaKrucaj/project-3-server-mealplannr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivanaKrucaj/project-3-server-mealplannr/issues"
+  },
+  "homepage": "https://github.com/ivanaKrucaj/project-3-server-mealplannr#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cloudinary": "^1.22.0",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.9.19",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "multer-storage-cloudinary": "^4.0.0",
+    "path": "^0.12.7"
+  }
+}
