@@ -1,4 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { Schema, model } = require("mongoose");
+const UserModel = require('./User.model')
 
 let RecipeSchema = new mongoose.Schema(
     {
@@ -11,16 +13,42 @@ let RecipeSchema = new mongoose.Schema(
         required: [true, 'Please enter recipe description.']
     },
     image: {
-        
+        type: String,
+        required: [true, 'Please upload image.']
     },
     steps: {
         type: String,
         required: [true, 'Please enter recipe steps.']
     },
     ingredients: {
-        type: String,
+        type: [
+            {
+                id: String,
+                quantity: Number,
+                quantity_unit: String,
+                quantity_in_grams: Number,
+                title: String,
+                calories: Number,
+                carbs: Number,
+                fat: Number,
+                protein: Number
+            }
+        ],
         required: [true, 'Please enter ingredients.']
-    }
+    },
+    number_of_portions: {
+        type: Number,
+        required: [true, 'Please enter number of portions.']
+    },
+    type: {
+        type: String,
+        enum: ['breakfast', 'lunch', 'dinner', 'snack'],
+        required: [true, 'Please enter type.']
+    },
+    // user: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'User'
+    // }
 },
 {
     timestamps: true

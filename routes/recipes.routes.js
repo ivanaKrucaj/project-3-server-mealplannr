@@ -41,12 +41,13 @@ router.get('/recipe/:recipe_id', (req, res) => {
 // AUTHENTICATED ROUTES:
 // ----------------------------------------------------
 
-// create recipe and post into db:
+// create recipe and post into db: 
 router.post('/recipe', isLoggedIn, (req, res) => {
-    const {title, description, image, steps, ingredients} = req.body;
-    RecipeModel.create({title: title, description: description, image: image, steps: steps, ingredients: ingredients})
+    const {title, description, image, steps, ingredients, number_of_portions, type} = req.body;
+    console.log(req)
+    RecipeModel.create({title: title, description: description, image: image, steps: steps, ingredients: [], type: type, number_of_portions: number_of_portions})
         .then((recipe) => {
-            res.status(200).json(recipe)
+            res.status(201).json(recipe)
         })
         .catch((err) => {
             res.status(500).json({
@@ -56,9 +57,10 @@ router.post('/recipe', isLoggedIn, (req, res) => {
         })
 })
 
-// put method
-router.put('/recipe/recipe_id', isLoggedIn, (req, res) => {
-    RecipeModel.findByIdAndUpdate(req.params.recipe_id)
+// update recipe:
+router.put('/recipe/:recipe_id', isLoggedIn ,(req, res) => {
+    const {title, description, image, steps, ingredients, number_of_portions, type} = req.body
+    RecipeModel.findByIdAndUpdate({_id: req.params.recipe_id}, {title: title, description: description, image: image, steps: steps, ingredients: [], type: type, number_of_portions: number_of_portions}, {new: true})
         .then((recipe) => {
             res.status(200).json(recipe)
         })
@@ -71,7 +73,7 @@ router.put('/recipe/recipe_id', isLoggedIn, (req, res) => {
 })
 
 // delete recipe from db:
-router.delete('/recipe/recipe_id', isLoggedIn, (req, res) => {
+router.delete('/recipe/:recipe_id', isLoggedIn, (req, res) => {
     RecipeModel.findByIdAndDelete(req.params.recipe_id)
         .then((recipe) => {
             res.status(200).json(recipe)

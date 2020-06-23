@@ -1,19 +1,25 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 let UserSchema = new mongoose.Schema(
     {
-    username: {
+    firstName: {
         type: String,
-        required: [true, 'Please enter username.']
+        required: [true, 'Please enter your first name.']
+    },
+    lastName: {
+        type: String,
+        required: [true, 'Please enter your last name.']
     },
     email: {
         type: String,
-        required: [true, 'Please enter email.']
+        required: [true, 'Please enter email.'],
+        unique: [true, 'Email already exists.']
     },
     passwordHash: {
         type: String,
         required: true
-    }
+    },
 },
 {
     timestamps: true

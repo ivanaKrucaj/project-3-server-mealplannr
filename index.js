@@ -44,7 +44,7 @@ app.use(cookieParser());
 
 //Use body parser. To be able parse post request information
 const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()) //crucial for post requests from client
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -62,6 +62,9 @@ app.use('/api', mealplanRoutes);
 
 const recipeRoutes = require('./routes/recipes.routes');
 app.use('/api', recipeRoutes);
+
+const shoppingList = require('./routes/shopping.list.routes');
+app.use('/api', shoppingList)
 
 app.use((req, res, next) => {
   // If no routes match, send them the React HTML.
