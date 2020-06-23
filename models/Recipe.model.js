@@ -20,9 +20,7 @@ let RecipeSchema = new mongoose.Schema(
         type: String,
         required: [true, 'Please enter recipe steps.']
     },
-    ingredients: {
-        type: [
-            {
+    ingredients: [{
                 id: String,
                 quantity: Number,
                 quantity_unit: String,
@@ -32,17 +30,17 @@ let RecipeSchema = new mongoose.Schema(
                 carbs: Number,
                 fat: Number,
                 protein: Number
-            }
-        ],
-        required: [true, 'Please enter ingredients.']
     },
+        {required: [true, 'Please enter ingredients.']
+    }
+],
     number_of_portions: {
         type: Number,
         required: [true, 'Please enter number of portions.']
     },
     type: {
         type: String,
-        enum: ['breakfast', 'lunch', 'dinner', 'snack'],
+        enum: ['Breakfast', 'Lunch', 'Dinner', 'Snack'],
         required: [true, 'Please enter type.']
     },
     // user: {

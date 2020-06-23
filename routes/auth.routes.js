@@ -6,7 +6,8 @@ const bcrypt = require('bcryptjs');
 
 const UserModel = require('../models/User.model');
 
-const { isLoggedIn } = require('../helper/auth-helper'); // to check if user is loggedIn
+// to check if user is loggedIn
+const { isLoggedIn } = require('../helper/auth-helper'); 
 
 router.post('/signup', (req, res) => {
     const {username, email, password } = req.body;
@@ -15,7 +16,7 @@ router.post('/signup', (req, res) => {
     if (!username || !email || !password) {
         res.status(500)
           .json({
-            errorMessage: 'Please enter username, email and password'
+            errorMessage: 'Please enter username, email and password.'
           });
         return;  
     }
@@ -24,7 +25,7 @@ router.post('/signup', (req, res) => {
     if (!myRegex.test(email)) {
         res.status(500)
           .json({
-            errorMessage: 'Email format not correct'
+            errorMessage: 'Email format not correct.'
         });
         return;  
     }
@@ -33,7 +34,7 @@ router.post('/signup', (req, res) => {
     // if (!myPassRegex.test(password)) {
     //   res.status(500)
     //       .json({
-    //         errorMessage: 'Password needs to have 8 characters, a number and an Uppercase alphabet'
+    //         errorMessage: 'Password needs to have 8 characters, a number and an uppercase letter.'
     //       });
     //     return;  
     // }
@@ -54,7 +55,7 @@ router.post('/signup', (req, res) => {
                 if (err.code === 11000) {
                   res.status(500)
                   .json({
-                    errorMessage: 'Username/email entered already exist!'
+                    errorMessage: 'Email entered already exists!'
                   });
                   return;  
                 } 
