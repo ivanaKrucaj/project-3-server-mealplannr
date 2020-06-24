@@ -23,8 +23,8 @@ router.get('/recipes', (req, res) => {
         })
 })
 
-// displaying recipe details:
-router.get('/recipe/:recipe_id', (req, res) => {
+// displaying recipe details: add is LoggedIn
+router.get('/recipe/:recipe_id',  (req, res) => {
     RecipeModel.findById(req.params.recipe_id)
         .then((recipe) => {
             res.status(200).json(recipe)
@@ -41,8 +41,8 @@ router.get('/recipe/:recipe_id', (req, res) => {
 // AUTHENTICATED ROUTES:
 // ----------------------------------------------------
 
-// create recipe and post into db: add isLoggedIn
-router.post('/recipe',  (req, res) => {
+// create recipe and post into db: 
+router.post('/recipe', isLoggedIn, (req, res) => {
     const {title, description, image, steps, ingredients, number_of_portions, type} = req.body;
     console.log(req.body)
     RecipeModel.create({title: title, description: description, image: image, steps: steps, ingredients: [], type: type, number_of_portions: number_of_portions})

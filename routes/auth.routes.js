@@ -74,6 +74,7 @@ router.post('/signup', (req, res) => {
  
 router.post('/signin', (req, res) => {
     const {email, password } = req.body;
+    console.log(password, '-----------')
     if ( !email || !password) {
         res.status(500).json({
             error: 'Please enter username, email and password',
@@ -104,13 +105,15 @@ router.post('/signin', (req, res) => {
                 }
                 //if passwords do not match
                 else {
+                    console.log('Doesn\'t match')
                     res.status(500).json({
                         error: 'Passwords don\'t match',
                     })
                   return; 
                 }
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err)
                 res.status(500).json({
                     error: 'Email format not correct',
                 })
@@ -119,6 +122,7 @@ router.post('/signin', (req, res) => {
       })
       //throw an error if the user does not exists 
       .catch((err) => {
+        console.log(err, '2nd catch')
         res.status(500).json({
             error: 'Email format not correct',
             message: err

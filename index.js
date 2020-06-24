@@ -10,6 +10,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 require("dotenv").config();
 
+// allow access to the API from different domains/origins
 const cors = require('cors')
 app.use(cors({
     credentials: true,

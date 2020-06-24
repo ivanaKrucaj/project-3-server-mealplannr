@@ -3,9 +3,9 @@ const { Schema, model } = require("mongoose");
 
 let UserSchema = new mongoose.Schema(
     {
-    userName: {
+    username: {
         type: String,
-        required: [true, 'Please enter your first name.']
+        required: [true, 'Please enter your username.']
     },
     email: {
         type: String,
