@@ -11,7 +11,7 @@ const {isLoggedIn} = require('../helper/auth-helper')
 
 // lists all mealplans created by user:
 router.get('/mealplans', isLoggedIn, (req, res) => {
-    MealplanModel.find()
+    MealplanModel.find().populate('recipes')
         .then((mealplans) => {
             res.status(200).json(mealplans)
         })
@@ -39,8 +39,11 @@ router.get('/mealplan/:mealplan_id', isLoggedIn, (req, res) => {
 
 // creates/posts mealplan:
 router.post('/mealplan', isLoggedIn, (req, res) => {
-    const {title, fromDate, toDate, recipes, shoppingList} = req.body;
-    MealplanModel.create({title: name, from_date: fromDate, to_date: toDate, recipes: recipes, shoppingList: shoppingList})
+    const {title, recipes} = req.body;
+    const recipeIds = recipes.map((recipe) => {
+        return recipe._id
+    })
+    MealplanModel.create({title: title,  recipes: recipeIds, shoppingList: []})
         .then((mealplan) => {
             res.status(201).json(mealplan)
         })

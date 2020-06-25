@@ -9,18 +9,10 @@ let MealplanSchema = new mongoose.Schema(
             type: String,
             required: [true, 'Please enter mealplan title.']
         },
-        from_date: {
-            type: Date,
-            required: [true, 'Please enter start date.']
-        },
-        to_date: {
-            type: Date,
-            required: [true, 'Please enter end date.']
-        },
-        recipes: {
+        recipes: [{
             type: Schema.Types.ObjectId,
             ref: 'Recipe'
-        },
+        }],
         shoppingList: [{
             title: String,
             quantity_in_grams: String,

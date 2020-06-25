@@ -1,21 +1,27 @@
 const express = require('express')
 const app = express()
-
 var path = require('path');
+require("dotenv").config();
+const passport = require('passport')
+require('./config/passport.config')
 
 //ensure database is connected
 require('./config/database.config')
 
+// Express View engine setup
+// app.use(require('node-sass-middleware')({
+//   src:  path.join(__dirname, 'public'),
+//   dest: path.join(__dirname, 'public'),
+//   sourceMap: true
+// }));
+
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-require("dotenv").config();
 
-// allow access to the API from different domains/origins
-const cors = require('cors')
-app.use(cors({
-    credentials: true,
-    origin: ['http://localhost:3000']
-}))
+
+// USE passport.initialize() and passport.session() HERE:
+app.use(passport.initialize());
+app.use(passport.session());
 
 let MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/Mealplannr'
 app.use(
@@ -43,12 +49,19 @@ app.use(logger('dev'));
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
-//Use body parser. To be able parse post request information
+//Use body parser. To be able to parse post request information
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()) //crucial for post requests from client
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+// allow access to the API from different domains/origins
+const cors = require('cors')
+app.use(cors({
+    credentials: true,
+    origin: ['http://localhost:3000']
+}))
 
 //Register routes
 const authRoutes = require('./routes/auth.routes');
