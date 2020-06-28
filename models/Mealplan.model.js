@@ -15,7 +15,7 @@ let MealplanSchema = new mongoose.Schema(
         }],
         shoppingList: [{
             title: String,
-            quantity_in_grams: String,
+            quantity: String,
             bought: Boolean
         }
         ],

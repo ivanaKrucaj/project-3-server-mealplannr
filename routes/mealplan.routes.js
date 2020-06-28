@@ -43,7 +43,34 @@ router.post('/mealplan', isLoggedIn, (req, res) => {
     const recipeIds = recipes.map((recipe) => {
         return recipe._id
     })
-    MealplanModel.create({title: title,  recipes: recipeIds, shoppingList: []})
+
+    // calculating repeating shopping list items:
+    const ingredients = recipes.map((recipe) => {
+        return recipe.ingredients
+    }).flat()
+
+    const shoppingList = ingredients.reduce((acc, ingredient) => {
+        if (ingredient.id in ingredient){
+            acc[ingredient.id] = {
+                id: ingredient.id,
+                quantity: acc[ingredient.id].quantity + ingredient.quantity_in_grams,
+                title: ingredient.title,
+                bought: false
+            }
+        } else {
+            acc[ingredient.id] = {
+                id: ingredient.id,
+                quantity: ingredient.quantity_in_grams,
+                title: ingredient.title,
+                bought: false
+            }
+        }
+        
+        return acc
+
+    }, {})
+
+    MealplanModel.create({title: title,  recipes: recipeIds, shoppingList: Object.values(shoppingList)})
         .then((mealplan) => {
             res.status(201).json(mealplan)
         })

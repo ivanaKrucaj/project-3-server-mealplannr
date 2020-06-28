@@ -20,6 +20,10 @@ let RecipeSchema = new mongoose.Schema(
         type: String,
         required: [true, 'Please enter recipe steps.']
     },
+    ingredientText: {
+        type: String,
+        required: [true, 'Please enter recipe ingredients.']
+    },
     ingredients: [{
                 id: String,
                 quantity: Number,
@@ -43,10 +47,10 @@ let RecipeSchema = new mongoose.Schema(
         enum: ['Breakfast', 'Lunch', 'Dinner', 'Snack'],
         required: [true, 'Please enter type.']
     },
-    // user: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'User'
-    // }
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
 },
 {
     timestamps: true

@@ -9,11 +9,11 @@ const { isLoggedIn } = require('../helper/auth-helper')
 // AUTHENTICATED ROUTES:
 // --------------------------------------------------
 
-// displaying a shopping list of a specific mealplan:
-router.get('/mealplan/:mealplan_id/shopping_list', isLoggedIn, (req, res) => {
+// displaying a shopping list of a specific mealplan: add isLoggedin    <=========
+router.get('/mealplan/:mealplan_id/shopping_list',  (req, res) => {
     MealplanModel.findById(req.params.mealplan_id)
-        .then((shoppingList) => {
-            res.status(200).json(shoppingList)
+        .then((mealplan) => {
+            res.status(200).json(mealplan.shoppingList)
         })
         .catch((err) => {
             res.status(500).json({
@@ -25,11 +25,12 @@ router.get('/mealplan/:mealplan_id/shopping_list', isLoggedIn, (req, res) => {
 
 // update shopping list:
 router.put('/mealplan/:mealplan_id/shopping_list', isLoggedIn, (req, res) => {
-    MealplanModel.findByIdAndUpdate(req.params.mealplan_id)
-        .then((shoppingList) => {
-            res.status(200).json(shoppingList)
+    MealplanModel.findByIdAndUpdate({ _id: req.params.mealplan_id }, { shoppingList: req.body.shoppingList }, {new: true})
+        .then((mealplan) => {
+            res.status(200).json(mealplan)
         })
         .catch((err) => {
+            console.log(err)
             res.status(500).json({
                 error: 'Could not update shopping list',
                 message: err
