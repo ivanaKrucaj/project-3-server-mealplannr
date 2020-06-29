@@ -5,7 +5,6 @@ const axios = require('axios')
 let RecipeModel = require('../models/Recipe.model')
 //checking if user is logged in:
 const { isLoggedIn } = require('../helper/auth-helper');
-const { session } = require('passport');
 
 // --------------------------------------------------
 // PUBLIC ROUTES:

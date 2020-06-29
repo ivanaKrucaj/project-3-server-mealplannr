@@ -2,26 +2,12 @@ const express = require('express')
 const app = express()
 var path = require('path');
 require("dotenv").config();
-const passport = require('passport')
-require('./config/passport.config')
 
 //ensure database is connected
 require('./config/database.config')
 
-// Express View engine setup
-// app.use(require('node-sass-middleware')({
-//   src:  path.join(__dirname, 'public'),
-//   dest: path.join(__dirname, 'public'),
-//   sourceMap: true
-// }));
-
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-
-
-// USE passport.initialize() and passport.session() HERE:
-app.use(passport.initialize());
-app.use(passport.session());
 
 let MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/Mealplannr'
 app.use(
@@ -67,7 +53,7 @@ app.use(cors({
 const authRoutes = require('./routes/auth.routes');
 app.use('/api', authRoutes);
 
-// //cloudinary route:
+// cloudinary route:
 const fileUploads = require('./routes/file.upload.routes');
 app.use('/api', fileUploads);
 
