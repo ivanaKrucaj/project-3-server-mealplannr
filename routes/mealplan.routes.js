@@ -25,7 +25,7 @@ router.get('/mealplans', isLoggedIn, (req, res) => {
 
 // finds specific mealplan:
 router.get('/mealplan/:mealplan_id', isLoggedIn, (req, res) => {
-    MealplanModel.findById(req.params.mealplan_id)
+    MealplanModel.findById(req.params.mealplan_id).populate('recipes')
         .then((mealplan) => {
             res.status(200).json(mealplan)
         })
@@ -96,19 +96,19 @@ router.delete('/mealplan/:mealplan_id', isLoggedIn, (req, res) => {
         })
 })
 
-// updates a specific mealplan:
-router.patch('/mealplan/:mealplan_id', isLoggedIn, (req, res) => {
-    MealplanModel.findByIdAndUpdate(req.params.mealplan_id)
-        .then((mealplan) => {
-            res.status(201).json(mealplan)
-        })
-        .catch((err) => {
-            res.status(500).json({
-                error: 'Could not find and update mealplan.',
-                message: err
-            })
-        })
-})
+// updates a specific mealplan:                                 <=== delete route
+// router.patch('/mealplan/:mealplan_id', isLoggedIn, (req, res) => {
+//     MealplanModel.findByIdAndUpdate(req.params.mealplan_id)
+//         .then((mealplan) => {
+//             res.status(201).json(mealplan)
+//         })
+//         .catch((err) => {
+//             res.status(500).json({
+//                 error: 'Could not find and update mealplan.',
+//                 message: err
+//             })
+//         })
+// })
 
 
 module.exports = router;
