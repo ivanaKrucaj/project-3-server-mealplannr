@@ -8,10 +8,6 @@ let RecipeSchema = new mongoose.Schema(
         type: String,
         required: [true, 'Please enter recipe title.']
     },
-    description: {
-        type: String,
-        required: [true, 'Please enter recipe description.']
-    },
     image: {
         type: String,
         required: [true, 'Please upload image.']
