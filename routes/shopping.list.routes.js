@@ -9,8 +9,8 @@ const { isLoggedIn } = require('../helper/auth-helper')
 // AUTHENTICATED ROUTES:
 // --------------------------------------------------
 
-// displaying a shopping list of a specific mealplan: add isLoggedin    <=========
-router.get('/mealplan/:mealplan_id/shopping_list',  (req, res) => {
+// displaying a shopping list of a specific mealplan: 
+router.get('/mealplan/:mealplan_id/shopping_list', isLoggedIn, (req, res) => {
     MealplanModel.findById(req.params.mealplan_id)
         .then((mealplan) => {
             res.status(200).json(mealplan.shoppingList)

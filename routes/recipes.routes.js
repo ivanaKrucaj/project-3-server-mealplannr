@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios')
+const axios = require('axios');
 
 let RecipeModel = require('../models/Recipe.model')
 //checking if user is logged in:
@@ -37,6 +37,7 @@ router.get('/recipe/:recipe_id', (req, res) => {
             })
         })
 })
+
 
 // ----------------------------------------------------
 // AUTHENTICATED ROUTES:
@@ -145,7 +146,7 @@ router.put('/recipe/:recipe_id', isLoggedIn, (req, res) => {
         })
 })
 
-// delete recipe from db:                                               <======= not deleting recipes from db
+// delete recipe from db:                                
 router.delete('/recipe/:recipe_id', isLoggedIn, (req, res) => {
     RecipeModel.findByIdAndDelete(req.params.recipe_id)
         .then((recipe) => {

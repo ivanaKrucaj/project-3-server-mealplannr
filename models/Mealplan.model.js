@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const { Schema, model } = require("mongoose");
-// const UserModel = require('./User.model');
-// const RecipeModel = require('./Recipe.model')
 
 let MealplanSchema = new mongoose.Schema(
     {

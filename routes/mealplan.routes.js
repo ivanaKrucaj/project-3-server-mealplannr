@@ -1,9 +1,9 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
-let MealplanModel = require('../models/Mealplan.model')
+let MealplanModel = require('../models/Mealplan.model');
 //checking if user is logged in:
-const {isLoggedIn} = require('../helper/auth-helper')
+const {isLoggedIn} = require('../helper/auth-helper');
 
 // --------------------------------------------------
 // AUTHENTICATED ROUTES:
@@ -96,7 +96,7 @@ router.delete('/mealplan/:mealplan_id', isLoggedIn, (req, res) => {
         })
 })
 
-// updates a specific mealplan:                                 <=== delete route
+// updates a specific mealplan:                                 <=== backlog
 // router.patch('/mealplan/:mealplan_id', isLoggedIn, (req, res) => {
 //     MealplanModel.findByIdAndUpdate(req.params.mealplan_id)
 //         .then((mealplan) => {
